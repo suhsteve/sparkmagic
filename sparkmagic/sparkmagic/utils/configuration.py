@@ -9,8 +9,8 @@ from hdijupyterutils.configuration import override_all as _override_all
 from hdijupyterutils.configuration import with_override
 
 from .constants import HOME_PATH, CONFIG_FILE, MAGICS_LOGGER_NAME, LIVY_KIND_PARAM, \
-    LANG_SCALA, LANG_PYTHON, LANG_R, \
-    SESSION_KIND_SPARKR, SESSION_KIND_SPARK, SESSION_KIND_PYSPARK, CONFIGURABLE_RETRY
+    LANG_SCALA, LANG_PYTHON, LANG_R, LANG_CSHARP, \
+    SESSION_KIND_SPARKR, SESSION_KIND_SPARK, SESSION_KIND_PYSPARK, SESSION_KIND_SPARKDOTNET, CONFIGURABLE_RETRY
 from sparkmagic.livyclientlib.exceptions import BadUserConfigurationException
 import sparkmagic.utils.constants as constants
 
@@ -39,6 +39,8 @@ def get_livy_kind(language):
         return SESSION_KIND_PYSPARK
     elif language == LANG_R:
         return SESSION_KIND_SPARKR
+    elif language == LANG_CSHARP:
+        return SESSION_KIND_SPARKDOTNET
     else:
         raise BadUserConfigurationException("Cannot get session kind for {}.".format(language))
 
@@ -98,6 +100,15 @@ def kernel_r_credentials():
 
 def base64_kernel_r_credentials():
     return _credentials_override(kernel_r_credentials)
+
+
+@_with_override
+def kernel_csharp_credentials():
+    return {u'username': u'', u'base64_password': u'', u'url': u'http://localhost:8998', u'auth': constants.NO_AUTH}
+
+
+def base64_kernel_csharp_credentials():
+    return _credentials_override(kernel_csharp_credentials)
 
 
 @_with_override

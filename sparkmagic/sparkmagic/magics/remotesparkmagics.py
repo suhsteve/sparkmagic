@@ -13,7 +13,7 @@ from hdijupyterutils.ipywidgetfactory import IpyWidgetFactory
 
 import sparkmagic.utils.configuration as conf
 from sparkmagic.utils.utils import parse_argstring_or_throw, get_coerce_value
-from sparkmagic.utils.constants import CONTEXT_NAME_SPARK, CONTEXT_NAME_SQL, LANG_PYTHON, LANG_R, LANG_SCALA
+from sparkmagic.utils.constants import CONTEXT_NAME_SPARK, CONTEXT_NAME_SQL, LANG_PYTHON, LANG_R, LANG_SCALA, LANG_CSHARP
 from sparkmagic.controllerwidget.magicscontrollerwidget import MagicsControllerWidget
 from sparkmagic.livyclientlib.command import Command
 from sparkmagic.livyclientlib.endpoint import Endpoint
@@ -56,7 +56,7 @@ class RemoteSparkMagics(SparkMagicBase):
     @argument("-p", "--password", type=str, default="", help="Password for HTTP access to Livy endpoint")
     @argument("-t", "--auth", type=str, default=None, help="Auth type for HTTP access to Livy endpoint. [Kerberos, None, Basic Auth]")
     @argument("-l", "--language", type=str, default=None,
-              help="Language for Livy session; one of {}".format(', '.join([LANG_PYTHON, LANG_SCALA, LANG_R])))
+              help="Language for Livy session; one of {}".format(', '.join([LANG_PYTHON, LANG_SCALA, LANG_R, LANG_CSHARP])))
     @argument("command", type=str, default=[""], nargs="*", help="Commands to execute.")
     @argument("-k", "--skip", type=bool, default=False, nargs="?", const=True, help="Skip adding session if it already exists")
     @argument("-i", "--id", type=int, default=None, help="Session ID")

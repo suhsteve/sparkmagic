@@ -1,7 +1,8 @@
-from sparkmagic.utils.constants import LANG_PYTHON, LANG_SCALA, LANG_R
+from sparkmagic.utils.constants import LANG_PYTHON, LANG_SCALA, LANG_R, LANG_CSHARP
 from sparkmagic.kernels.sparkkernel.sparkkernel import SparkKernel
 from sparkmagic.kernels.pysparkkernel.pysparkkernel import PySparkKernel
 from sparkmagic.kernels.sparkrkernel.sparkrkernel import SparkRKernel
+from sparkmagic.kernels.sparkdotnetkernel.sparkdotnetkernel import SparkDotnetKernel
 
 
 class TestPyparkKernel(PySparkKernel):
@@ -20,6 +21,12 @@ class TestSparkRKernel(SparkRKernel):
     def __init__(self):
         kwargs = {"testing": True}
         super(TestSparkRKernel, self).__init__(**kwargs)
+
+
+class TestSparkDotnetKernel(SparkDotnetKernel):
+    def __init__(self):
+        kwargs = {"testing": True}
+        super(TestSparkDotnetKernel, self).__init__(**kwargs)
 
 
 def test_pyspark_kernel_configs():
@@ -52,6 +59,7 @@ def test_spark_kernel_configs():
         'codemirror_mode': 'text/x-scala'
     }
 
+
 def test_sparkr_kernel_configs():
     kernel = TestSparkRKernel()
 
@@ -67,3 +75,18 @@ def test_sparkr_kernel_configs():
         'codemirror_mode': 'text/x-rsrc'
     }
 
+
+def test_sparkdotnet_kernel_configs():
+    kernel = TestSparkDotnetKernel()
+
+    assert kernel.session_language == LANG_CSHARP
+
+    assert kernel.implementation == 'Spark .NET'
+    assert kernel.language == 'no-op'
+    assert kernel.language_version == '0.1'
+    assert kernel.language_info == {
+        'name': 'sparkdotnet',
+        'mimetype': 'text/x-csharp',
+        'pygments_lexer': 'csharp',
+        'codemirror_mode': 'text/x-csharp'
+    }

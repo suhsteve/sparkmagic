@@ -1,0 +1,3 @@
+{"argv":["python","-m","sparkmagic.kernels.sparkdotnetkernel.sparkdotnetkernel", "-f", "{connection_file}"],
+ "display_name":"Spark .NET"
+}
